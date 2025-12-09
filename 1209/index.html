@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>張詠棠的自我介紹</title>
+    <style>
+        body {
+            background: #ffe4ef;
+            font-family: 'Segoe UI', '微軟正黑體', Arial, sans-serif;
+            color: #b4668e;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            background: #fff7fb;
+            margin: 60px auto 30px auto;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px #fcbad355;
+            padding: 32px 24px;
+            text-align: center;
+        }
+        h1, ul, ul li, .contact, .contact a, .photos-title {
+            font-family: 'Segoe UI', '微軟正黑體', Arial, sans-serif;
+            font-size: 1.15em;
+            color: #b4668e;
+            letter-spacing: 1px;
+        }
+        h1 {
+            font-size: 1.5em;
+            margin-bottom: 0.5em;
+            color: #e75480;
+            letter-spacing: 2px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 24px 0 0 0;
+        }
+        ul li {
+            margin: 10px 0;
+            padding-left: 0.5em;
+            position: relative;
+        }
+        ul li:before {
+            content: "♡";
+            color: #da99ac;
+            margin-right: 8px;
+            font-size: 1em;
+        }
+        .photos-title {
+            margin-top: 28px;
+            font-size: 1.15em;
+            color: #e75480;
+            letter-spacing: 2px;
+        }
+        .photos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 16px 0 0 0;
+        }
+        .photos img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px #fcbad355;
+            background: #fff;
+        }
+        .contact {
+            margin-top: 24px;
+        }
+        .contact a {
+            color: #e75480;
+            text-decoration: none;
+            margin: 0 6px;
+        }
+        .contact a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            .container {
+            padding: 16px 6px;
+            }
+            h1 {
+            font-size: 1.2em;
+            }
+            h1, ul, ul li, .contact, .contact a, .photos-title {
+            font-size: 1em;
+            }
+            .photos img {
+            width: 60px;
+            height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>我是張詠棠</h1>
+        <ul>
+            <li>喜歡演奏樂器和跳舞</li>
+            <li>休閒活動喜歡看動漫和玩手遊</li>
+        </ul>
+        <div class="photos-title">我的照片</div>
+        <div class="photos">
+            <img src="images/photo.jpg" alt="張詠棠照片">
+        </div>
+    </div>
+</body>
+</html>
