@@ -56,30 +56,61 @@
             letter-spacing: 2px;
         }
         .photos {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             gap: 12px;
-            justify-content: center;
+            justify-items: center;
             margin: 16px 0 0 0;
         }
         .photos img {
-            width: 90px;
-            height: 90px;
+            width: 100%;
+            max-width: 160px;
+            height: 120px;
             object-fit: cover;
             border-radius: 12px;
             box-shadow: 0 2px 8px #fcbad355;
             background: #fff;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        .contact {
-            margin-top: 24px;
+        .photos img:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 6px 18px #fcbad377; }
+
+        /* lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.75);
+            z-index: 1000;
+            padding: 20px;
         }
-        .contact a {
-            color: #e75480;
-            text-decoration: none;
-            margin: 0 6px;
+        .lightbox.open { display:flex; }
+        .lightbox img {
+            max-width: 95%;
+            max-height: 85%;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
         }
-        .contact a:hover {
-            text-decoration: underline;
+        .lightbox .controls {
+            position: absolute;
+            inset: 0;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            pointer-events:none;
+        }
+        .lightbox button {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: #fff;
+            font-size: 1.8rem;
+            padding: 8px 12px;
+            margin: 8px;
+            border-radius: 6px;
+            pointer-events:auto;
+            cursor:pointer;
         }
         @media (max-width: 600px) {
             .container {
@@ -107,8 +138,74 @@
         </ul>
         <div class="photos-title">我的照片</div>
         <div class="photos">
-            <img src="images/photo.jpg" alt="張詠棠照片">
+            <img src="1.png" alt="photo1" data-full="../1007/pic1.jpg">
+            <img src="../1007/pic2.jpg" alt="photo2" data-full="../1007/pic2.jpg">
+            <img src="../1007/pic3.jpg" alt="photo3" data-full="../1007/pic3.jpg">
+            <img src="../1014/regina085.jpg" alt="regina" data-full="../1014/regina085.jpg">
+            <img src="../1021/pic.1.jpg" alt="pic1" data-full="../1021/pic.1.jpg">
+            <img src="../1021/pic.2.jpg" alt="pic2" data-full="../1021/pic.2.jpg">
+            <img src="../1104/1.jpg" alt="1104-1" data-full="../1104/1.jpg">
+            <img src="../1104/2.jpg" alt="1104-2" data-full="../1104/2.jpg">
+            <img src="../1104/3.jpg" alt="1104-3" data-full="../1104/3.jpg">
+            <img src="../1118/1.jpg" alt="1118-1" data-full="../1118/1.jpg">
+            <img src="../20250930/pic1.png" alt="2025-1" data-full="../20250930/pic1.png">
+        </div>
+
+        <div class="lightbox" id="lightbox">
+            <button id="closeBtn" aria-label="關閉">✕</button>
+            <div class="controls">
+                <button id="prevBtn" aria-label="上一張">‹</button>
+                <button id="nextBtn" aria-label="下一張">›</button>
+            </div>
+            <img id="lightboxImg" src="" alt="預覽照片">
+        </div>
+        <div class="contact">
+            <a href="https://instagram.com/yt.085_" target="_blank" aria-label="Instagram" style="display:inline-block;vertical-align:middle;">
+                <svg width="36" height="36" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;">
+                  <rect width="50" height="50" rx="12" fill="#fff"/>
+                  <radialGradient id="ig1" cx="0.5" cy="0.5" r="0.7">
+                    <stop offset="0%" stop-color="#f9ce34"/>
+                    <stop offset="45%" stop-color="#ee2a7b"/>
+                    <stop offset="100%" stop-color="#6228d7"/>
+                  </radialGradient>
+                  <rect x="5" y="5" width="40" height="40" rx="10" fill="url(#ig1)"/>
+                  <circle cx="25" cy="25" r="10" stroke="#fff" stroke-width="3" fill="none"/>
+                  <circle cx="25" cy="25" r="6.5" stroke="#fff" stroke-width="2" fill="none"/>
+                  <circle cx="33.5" cy="16.5" r="2.2" fill="#fff"/>
+                </svg>
+                <span style="margin-left:8px; color:#e75480; font-weight:bold; font-size:1.1em; letter-spacing:1px;">Instagram</span>
+            </a>
         </div>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', ()=> {
+      const imgs = Array.from(document.querySelectorAll('.photos img'));
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const closeBtn = document.getElementById('closeBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      let index = 0;
+      function openAt(i){
+        index = i;
+        const src = imgs[index].dataset.full || imgs[index].src;
+        lightboxImg.src = src;
+        lightbox.classList.add('open');
+      }
+      imgs.forEach((img,i)=> img.addEventListener('click', ()=> openAt(i)));
+      function close(){ lightbox.classList.remove('open'); lightboxImg.src=''; }
+      closeBtn.addEventListener('click', close);
+      lightbox.addEventListener('click', (e)=> { if(e.target===lightbox) close(); });
+      prevBtn.addEventListener('click', ()=> openAt((index-1+imgs.length)%imgs.length));
+      nextBtn.addEventListener('click', ()=> openAt((index+1)%imgs.length));
+      document.addEventListener('keydown', (e)=> {
+        if(!lightbox.classList.contains('open')) return;
+        if(e.key==='Escape') close();
+        if(e.key==='ArrowLeft') prevBtn.click();
+        if(e.key==='ArrowRight') nextBtn.click();
+      });
+    });
+    </script>
 </body>
 </html>
