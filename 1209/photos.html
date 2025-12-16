@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>我的照片 - 張詠棠</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #fff7fb; color: #b4668e; font-family: 'Segoe UI', '微軟正黑體', Arial, sans-serif; margin:0; }
+        .container { max-width: 480px; background: #fff; margin: 60px auto 30px auto; border-radius: 16px; box-shadow: 0 2px 12px #fcbad355; padding: 32px 24px; text-align: center; }
+        h1 { color: #e75480; font-size: 1.6em; margin-bottom: 0.5em; }
+        .photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 14px; justify-items: center; margin: 18px 0 0 0; }
+        .photos img { width: 100%; max-width: 160px; height: 120px; object-fit: cover; border-radius: 12px; box-shadow: 0 2px 8px #fcbad355; background: #fff; }
+        .back { margin-top: 24px; }
+        .back a { color: #e75480; text-decoration: none; font-weight: bold; }
+        .back a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>我的照片</h1>
+        <div class="photos">
+            <img src="../1007/pic2.jpg" alt="photo2">
+            <img src="../1007/pic3.jpg" alt="photo3">
+            <img src="../1014/regina085.jpg" alt="regina">
+        </div>
+        <div class="back"><a href="index.html">← 回首頁</a></div>
+    </div>
+</body>
+</html>
